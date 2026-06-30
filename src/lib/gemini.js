@@ -63,7 +63,8 @@ export async function triageReport(description, locality) {
     return JSON.parse(text);
   } catch (error) {
     console.error("Gemini triage error:", error);
-    throw new Error("Failed to process report with AI. Please try again.");
+    const msg = error?.message || error?.toString() || "Unknown error";
+    throw new Error(`AI Error: ${msg}`);
   }
 }
 
